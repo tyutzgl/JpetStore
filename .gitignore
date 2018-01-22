@@ -4,3 +4,4 @@ target
 *.txt
 *.project
 .settings
+.classpath
