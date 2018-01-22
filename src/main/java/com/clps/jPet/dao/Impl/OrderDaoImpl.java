@@ -79,7 +79,7 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Orders> queryOrder(String userid, int begin, int end) {
 
 		Session session = sessionFactory.openSession();
-		String hql = "from Orders where userid = ?";
+		String hql = "FROM Orders WHERE userid = ?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, userid);
 		query.setFirstResult(begin);
@@ -103,7 +103,7 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Inventory> queryInventory() {
 
 		Session session = sessionFactory.openSession();
-		String hql = "from Inventory";
+		String hql = "FROM Inventory";
 		Query query = session.createQuery(hql);
 		List<Inventory> inventorylist = query.list();
 		session.close();

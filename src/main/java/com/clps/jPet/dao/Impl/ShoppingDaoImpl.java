@@ -33,7 +33,7 @@ public class ShoppingDaoImpl implements ShoppingDao{
 
 		Session session = sessionFactory.openSession();
 
-		String hql = "from Cart where userid = ?";
+		String hql = "FROM Cart WHERE userid = ?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, userid);
 		query.setFirstResult(begin);
@@ -50,7 +50,7 @@ public class ShoppingDaoImpl implements ShoppingDao{
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 
-		String hql = "delete from Cart where itemid = ? and userid = ?";
+		String hql = "DELETE FROM Cart WHERE itemid = ? AND userid = ?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, itemid);
 		query.setParameter(1, userid);
@@ -66,7 +66,7 @@ public class ShoppingDaoImpl implements ShoppingDao{
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
-		String hql = "update Cart set quantity = ? where itemid = ? and userid=?";
+		String hql = "UPDATE Cart SET quantity = ? where itemid = ? and userid=?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, quantity);
 		query.setParameter(1, itemid);
@@ -82,7 +82,7 @@ public class ShoppingDaoImpl implements ShoppingDao{
 
 	public int queryCountShopping(String itemid, String userid) {
 		Session session = sessionFactory.openSession();
-		String hql = "select count(*) from Cart where itemid = ? and userid = ?";
+		String hql = "SELECT count(*) FROM Cart WHERE itemid = ? AND userid = ?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, itemid);
 		query.setParameter(1, userid);
@@ -97,7 +97,7 @@ public class ShoppingDaoImpl implements ShoppingDao{
 
 		Session session = sessionFactory.openSession();
 
-		String hql = "from Cart where userid = ? and itemid=?";
+		String hql = "FROM Cart WHERE userid = ? AND itemid=?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, userid);
 		query.setParameter(1, itemid);
@@ -111,7 +111,7 @@ public class ShoppingDaoImpl implements ShoppingDao{
 	public long count(String itemid, String userid) {
 		Session session = sessionFactory.openSession();
 
-		String hql = "select quantity from Cart where userid = ? and itemid=?";
+		String hql = "SELECT quantity FROM Cart WHERE userid = ? AND itemid=?";
 		Query query = session.createQuery(hql);
 
 		query.setParameter(0, userid);

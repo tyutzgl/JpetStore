@@ -27,7 +27,7 @@ public class CategoryDaoImpl implements CategoryDao{
 
 		Session session = sessionFactory.openSession();
 
-		String hql = "from Product where category = ?";
+		String hql = "FROM Product WHERE category = ?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, category);
 		query.setFirstResult(begin);
@@ -67,7 +67,7 @@ public class CategoryDaoImpl implements CategoryDao{
 
 		Session session = sessionFactory.openSession();
 		// Item Item = (Item) session.get(Item.class, itemid);
-		String hql = "from Item where itemid = ?";
+		String hql = "FROM Item WHERE itemid = ?";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, itemid);
 		List<Item> itemlist = query.list();

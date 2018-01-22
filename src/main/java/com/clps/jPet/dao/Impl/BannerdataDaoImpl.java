@@ -19,7 +19,7 @@ public class BannerdataDaoImpl implements BannerdataDao{
 
 	public Bannerdata querybanner(String userid) {
 		Session session = sessionFactory.openSession();
-		String hql = "from Bannerdata where favcategory = (select favcategory from Profile where userid = ? )";
+		String hql = "FROM Bannerdata WHERE favcategory = (SELECT favcategory FROM Profile WHERE userid = ? )";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, userid);
 		List<Bannerdata> bannerdatalist = query.list();
@@ -33,7 +33,7 @@ public class BannerdataDaoImpl implements BannerdataDao{
 
 		Session session = sessionFactory.openSession();
 
-		String hql = "from Profile where userid = ? ";
+		String hql = "FROM Profile WHERE userid = ? ";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, userid);
 		List<Profile> profilelist = query.list();
@@ -46,7 +46,7 @@ public class BannerdataDaoImpl implements BannerdataDao{
 
 		Session session = sessionFactory.openSession();
 
-		String hql = "from Bannerdata where favcategory = (select favcategory from Profile where userid = ? )";
+		String hql = "FROM Bannerdata WHERE favcategory = (SELECT favcategory FROM Profile WHERE userid = ? )";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, userid);
 		List<Bannerdata> bannerdatalist = query.list();

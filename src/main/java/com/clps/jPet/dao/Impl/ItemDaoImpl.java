@@ -24,7 +24,7 @@ import com.clps.jPet.pojo.Item;
 
       public List<Item> getItems() {
           Session session = sessionFactory.openSession();
-          String hql = "from Item";
+          String hql = "FROM Item";
           Query query = session.createQuery(hql);
           List<Item> items = query.list();
           System.out.println(items.get(1).getItemid());
@@ -35,7 +35,7 @@ import com.clps.jPet.pojo.Item;
 
       public List<Item> getItemList() {
           Session session = sessionFactory.openSession();
-          String hql = "from Item";
+          String hql = "FROM Item";
           Query query = session.createQuery(hql);
           List<Item> items = query.list();
           System.out.println(items.get(1).getItemid());

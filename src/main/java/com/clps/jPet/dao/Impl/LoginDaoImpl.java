@@ -22,7 +22,7 @@ public class LoginDaoImpl implements LoginDao {
 
         Session session = sessionFactory.openSession();
 
-        String hql = "select count(*) from Signon where username = ? and password = ?";
+        String hql = "SELECT count(*) FROM Signon WHERE username = ? AND password = ?";
         Query query = session.createQuery(hql);
         query.setParameter(0, userid);
         query.setParameter(1, password);
