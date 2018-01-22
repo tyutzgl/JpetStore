@@ -31,30 +31,32 @@
 		<!-- 配置datasource -->
 		<property name="dataSource" ref="dataSource" />
 
+		<!-- 配置mapping映射文件 写法一 -->
 		<property name="mappingDirectoryLocations">
 			<list>
 				<value>classpath:com/clps/demo/domain/</value>
-				<value>classpath:com/clps/jPet/domain/</value>
+				<value>classpath:com/clps/jPet/pojo/mapping/</value>
 			</list>
 		</property>
-		
+
+		<!-- 配置mapping映射文件 写法二 -->
 		<!-- <property name="mappingResources">
 			<list>
-				<value>com/clps/demo/domain/User.hbm.xml</value>
+				<value>com/clps/demo/pojo/User.hbm.xml</value>
 
-				<value>com/clps/jPet/domain/Account.hbm.xml</value>
-				<value>com/clps/jPet/domain/Bannerdata.hbm.xml</value>
-				<value>com/clps/jPet/domain/Category.hbm.xml</value>
-				<value>com/clps/jPet/domain/Inventory.hbm.xml</value>
-				<value>com/clps/jPet/domain/Item.hbm.xml</value>
-				<value>com/clps/jPet/domain/Lineitem.hbm.xml</value>
-				<value>com/clps/jPet/domain/Orders.hbm.xml</value>
-				<value>com/clps/jPet/domain/Orderstatus.hbm.xml</value>
-				<value>com/clps/jPet/domain/Product.hbm.xml</value>
-				<value>com/clps/jPet/domain/Profile.hbm.xml</value>
-				<value>com/clps/jPet/domain/Sequence.hbm.xml</value>
-				<value>com/clps/jPet/domain/Signon.hbm.xml</value>
-				<value>com/clps/jPet/domain/Supplier.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Account.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Bannerdata.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Category.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Inventory.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Item.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Lineitem.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Orders.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Orderstatus.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Product.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Profile.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Sequence.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Signon.hbm.xml</value>
+				<value>com/clps/jPet/pojo/Supplier.hbm.xml</value>
 			</list>
 		</property> -->
 
@@ -73,7 +75,7 @@
 	<!-- 定义事务管理器 -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<!-- 定义事务 -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">

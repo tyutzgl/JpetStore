@@ -1,5 +1,5 @@
 <%@ page language="java"
-         import="java.util.*,com.clps.jPet.domain.*,java.lang.Integer"
+         import="java.util.*,com.clps.jPet.pojo.*,java.lang.Integer"
          pageEncoding="UTF-8" %>
 
 

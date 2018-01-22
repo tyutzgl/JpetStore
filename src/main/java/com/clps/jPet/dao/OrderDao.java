@@ -9,116 +9,74 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.clps.jPet.domain.Account;
-import com.clps.jPet.domain.Inventory;
-import com.clps.jPet.domain.Lineitem;
-import com.clps.jPet.domain.Orders;
-import com.clps.jPet.domain.Orderstatus;
+import com.clps.jPet.pojo.Account;
+import com.clps.jPet.pojo.Inventory;
+import com.clps.jPet.pojo.Lineitem;
+import com.clps.jPet.pojo.Orders;
+import com.clps.jPet.pojo.Orderstatus;
 
-@Repository
-public class OrderDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+public interface OrderDao {
 
-	public Account queryAccount(String userid) {
+    /**
+     * query account by user's id
+     *
+     * @param userid
+     * @return
+     */
+    Account queryAccount(String userid);
 
-		Session session = sessionFactory.openSession();
+    /**
+     * save order
+     *
+     * @param orders
+     */
+    void saveOrder(Orders orders);
 
-		Account account = (Account) session.get(Account.class, userid);
+    /**
+     * save item's line number
+     *
+     * @param lineitem
+     */
+    void saveLineitem(Lineitem lineitem);
 
-		session.close();
-		return account;
-	}
+    /**
+     * save order's status
+     *
+     * @param orderstatus
+     */
+    void saveOrderstatus(Orderstatus orderstatus);
 
-	public void saveOrder(Orders orders) {
+    /**
+     * query order listings by user's id
+     *
+     * @param userid
+     * @param begin
+     * @param end
+     * @return
+     */
+    List<Orders> queryOrder(String userid, int begin, int end);
 
-		Session session = sessionFactory.openSession();
-		Transaction tr = session.beginTransaction();
-		/*
-		 * Orders order = new Orders(); order.setAccount(account);
-		 * order.setOrderstatuses(orderstatus); order.setLineitems(lineitems);
-		 */
-		System.out.println(orders.toString());
-		orders.setBilltolastname("liang");
-		orders.setShiptolastname("liang");
-		orders.setLocale("浦东软件园");
-		session.save(orders);
+    /**
+     * Query order by order's id
+     *
+     * @param orderid
+     * @return
+     */
+    Orders queryOrdersOne(int orderid);
 
-		tr.commit();
-		session.close();
+    /**
+     * Query inventory listings
+     *
+     * @return List<Inventory>
+     */
+    List<Inventory> queryInventory();
 
-	}
-
-	public void saveLineitem(Lineitem lineitem) {
-
-		Session session = sessionFactory.openSession();
-		Transaction tr = session.beginTransaction();
-
-		
-		session.save(lineitem);
-
-		tr.commit();
-		session.close();
-
-	}
-
-	public void saveOrderstatus(Orderstatus orderstatus) {
-
-		Session session = sessionFactory.openSession();
-		Transaction tr = session.beginTransaction();
-
-		session.save(orderstatus);
-
-		tr.commit();
-		session.close();
-
-	}
-
-	public List<Orders> queryOrder(String userid, int begin, int end) {
-
-		Session session = sessionFactory.openSession();
-		String hql = "from Orders where userid = ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, userid);
-		query.setFirstResult(begin);
-		query.setMaxResults(end);
-		List<Orders> orderslist = query.list();
-
-		session.close();
-		return orderslist;
-
-	}
-
-	public Orders queryOrdersOne(int orderid) {
-		Session session = sessionFactory.openSession();
-		Orders orders = (Orders) session.get(Orders.class, orderid);
-
-		session.close();
-		return orders;
-
-	}
-
-	public List<Inventory> queryInventory() {
-
-		Session session = sessionFactory.openSession();
-		String hql = "from Inventory";
-		Query query = session.createQuery(hql);
-		List<Inventory> inventorylist = query.list();
-		session.close();
-		return inventorylist;
-
-	}
-
-	public void updateInventory(Inventory inventory) {
-
-		Session session = sessionFactory.openSession();
-		Transaction tr = session.beginTransaction();
-
-		session.update(inventory);
-
-		tr.commit();
-		session.close();
-	}
+    /**
+     * update item's inventory
+     *
+     * @param inventory
+     */
+    void updateInventory(Inventory inventory);
 
 }

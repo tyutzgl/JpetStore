@@ -7,9 +7,9 @@ import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.clps.jPet.domain.Bannerdata;
-import com.clps.jPet.domain.Profile;
-import com.clps.jPet.domain.Signon;
+import com.clps.jPet.pojo.Bannerdata;
+import com.clps.jPet.pojo.Profile;
+import com.clps.jPet.pojo.Signon;
 import com.clps.jPet.service.BannerdataService;
 import com.opensymphony.xwork2.ActionSupport;
 

@@ -6,58 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clps.jPet.dao.ShoppingDao;
-import com.clps.jPet.domain.Cart;
+import com.clps.jPet.pojo.Cart;
 
-@Service
-public class ShoppingService {
+public interface ShoppingService {
 
-	@Autowired
-	private ShoppingDao shoppingDao;
+    void saveShopping(Cart cart);
 
-	public void saveShopping(Cart cart) {
+    List<Cart> queryShopping(String username, int begin, int end);
 
-		shoppingDao.saveShopping(cart);
+    int deleteShopping(String itemid, String userid);
 
-	}
+    int updateQuantity(int quantity, String itemid, String userid);
 
-	public List<Cart> queryShopping(String username, int begin, int end) {
-		// TODO Auto-generated method stub
-		return shoppingDao.queryShopping(username, begin, end);
-	}
+    int queryCountShopping(String itemid, String userid);
 
-	public int deleteShopping(String itemid, String userid) {
+    Cart queryOneShopping(String userid, String itemid);
 
-		return shoppingDao.deleteShopping(itemid, userid);
-	}
+    long count(String itemid, String userid);
 
-	public int updateQuantity(int quantity, String itemid, String userid) {
+    ShoppingDao getShoppingDao();
 
-		return shoppingDao.updateQuantity(quantity, itemid, userid);
-	}
-
-	public int queryCountShopping(String itemid, String userid) {
-
-		return shoppingDao.queryCountShopping(itemid, userid);
-	}
-
-	public Cart queryOneShopping(String userid, String itemid) {
-
-		return shoppingDao.queryOneShopping(userid, itemid);
-
-	}
-
-	public long count(String itemid, String userid) {
-
-		return shoppingDao.count(itemid, userid);
-
-	}
-
-	public ShoppingDao getShoppingDao() {
-		return shoppingDao;
-	}
-
-	public void setShoppingDao(ShoppingDao shoppingDao) {
-		this.shoppingDao = shoppingDao;
-	}
+    void setShoppingDao(ShoppingDao shoppingDao);
 
 }

@@ -1,69 +1,28 @@
 package com.clps.jPet.dao;
 
-import java.util.List;
+import com.clps.jPet.pojo.Bannerdata;
+import com.clps.jPet.pojo.Profile;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+public interface BannerdataDao {
 
-import com.clps.jPet.domain.Bannerdata;
-import com.clps.jPet.domain.Profile;
+    /**
+     * get user's bannerdata
+     * @param userid
+     * @return Bannerdata
+     */
+    Bannerdata querybanner(String userid);
 
-@Repository
-public class BannerdataDao {
+    /**
+     * get user's profile
+     * @param userid
+     * @return Profile
+     */
+    Profile queryMyListOpf(String userid);
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public Bannerdata querybanner(String userid) {
-		Session session = sessionFactory.openSession();
-		String hql = "from Bannerdata where favcategory = (select favcategory from Profile where userid = ? )";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, userid);
-		List<Bannerdata> bannerdatalist = query.list();
-
-		session.close();
-
-		return bannerdatalist.get(0);
-	}
-
-	public Profile queryMyListOpf(String userid) {
-
-		Session session = sessionFactory.openSession();
-
-		String hql = "from Profile where userid = ? ";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, userid);
-		List<Profile> profilelist = query.list();
-		session.close();
-
-		return profilelist.get(0);
-	}
-
-	public Bannerdata querybannerTwo(String userid) {
-
-		Session session = sessionFactory.openSession();
-
-		String hql = "from Bannerdata where favcategory = (select favcategory from Profile where userid = ? )";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, userid);
-		List<Bannerdata> bannerdatalist = query.list();
-
-		session.close();
-
-		return bannerdatalist.get(0);
-	}
-
-	public Profile queryMyList(String userid) {
-
-		Session session = sessionFactory.openSession();
-
-		Profile profile = (Profile) session.get(Profile.class, userid);
-
-		session.close();
-
-		return profile;
-	}
+    /**
+     * get user's profile 2
+     * @param userid
+     * @return Profile
+     */
+    Profile queryMyList(String userid);
 }

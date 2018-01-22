@@ -2,123 +2,63 @@ package com.clps.jPet.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.clps.jPet.pojo.Cart;
 
-import com.clps.jPet.domain.Cart;
+public interface ShoppingDao {
 
-@Repository
-public class ShoppingDao {
+    /**
+     * Add items to shopping cart
+     * @param cart
+     */
+    void saveShopping(Cart cart);
 
-	@Autowired
-	private SessionFactory sessionFactory;
+    /**
+     * Query user's shopping cart by user's id
+     * @param userid
+     * @param begin
+     * @param end
+     * @return  List<Cart>
+     */
+    List<Cart> queryShopping(String userid, int begin, int end);
 
-	public void saveShopping(Cart cart) {
+    /**
+     * Remove the item from the shopping cart by item's id and user's id
+     * @param itemid
+     * @param userid
+     * @return int>0 表示删除成功
+     */
+    int deleteShopping(String itemid, String userid);
 
-		Session session = sessionFactory.openSession();
-		Transaction tr = session.beginTransaction();
+    /**
+     * update item's quantity
+     * @param quantity
+     * @param itemid
+     * @param userid
+     * @return
+     */
+    int updateQuantity(int quantity, String itemid, String userid);
 
-		session.save(cart);
+    /**
+     * Query user's shopping cart's item quantity
+     * @param itemid
+     * @param userid
+     * @return item quantity
+     */
+    int queryCountShopping(String itemid, String userid);
 
-		tr.commit();
-		session.close();
-	}
+    /**
+     * query one item from user's shopping cart
+     * @param userid
+     * @param itemid
+     * @return item
+     */
+    Cart queryOneShopping(String userid, String itemid);
 
-	public List<Cart> queryShopping(String userid, int begin, int end) {
-
-		Session session = sessionFactory.openSession();
-
-		String hql = "from Cart where userid = ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, userid);
-		query.setFirstResult(begin);
-		query.setMaxResults(end);
-		List<Cart> cartlist = query.list();
-
-		session.close();
-		return cartlist;
-
-	}
-
-	public int deleteShopping(String itemid, String userid) {
-
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-
-		String hql = "delete from Cart where itemid = ? and userid = ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, itemid);
-		query.setParameter(1, userid);
-		int result = query.executeUpdate();
-
-		tx.commit();
-		session.close();
-		return result;
-
-	}
-
-	public int updateQuantity(int quantity,String itemid,String userid){
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		
-		String hql = "update Cart set quantity = ? where itemid = ? and userid=?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, quantity);
-		query.setParameter(1, itemid);
-		query.setParameter(2, userid);
-		int result = query.executeUpdate();
-		
-		tx.commit();
-		session.close();
-		return result;
-		
-		
-	}
-
-	public int queryCountShopping(String itemid, String userid) {
-		Session session = sessionFactory.openSession();
-		String hql = "select count(*) from Cart where itemid = ? and userid = ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, itemid);
-		query.setParameter(1, userid);
-
-		Number num = (Number) query.uniqueResult();
-		int i = num.intValue();
-		session.close();
-		return i;
-	}
-
-	public Cart queryOneShopping(String userid, String itemid) {
-
-		Session session = sessionFactory.openSession();
-
-		String hql = "from Cart where userid = ? and itemid=?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, userid);
-		query.setParameter(1, itemid);
-		Cart cart = (Cart) query.uniqueResult();
-
-		session.close();
-		return cart;
-
-	}
-
-	public long count(String itemid, String userid) {
-		Session session = sessionFactory.openSession();
-
-		String hql = "select quantity from Cart where userid = ? and itemid=?";
-		Query query = session.createQuery(hql);
-
-		query.setParameter(0, userid);
-		query.setParameter(1, itemid);
-		long i = (Long) query.uniqueResult();
-
-		session.close();
-		return i;
-
-	}
+    /**
+     * query item's quantity from user's shopping cart
+     * @param itemid
+     * @param userid
+     * @return item's quantity
+     */
+    long count(String itemid, String userid);
 }

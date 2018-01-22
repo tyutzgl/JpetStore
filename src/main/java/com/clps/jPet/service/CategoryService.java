@@ -6,53 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clps.jPet.dao.CategoryDao;
-import com.clps.jPet.domain.Category;
-import com.clps.jPet.domain.Item;
-import com.clps.jPet.domain.Product;
-import com.clps.jPet.domain.Profile;
+import com.clps.jPet.pojo.Category;
+import com.clps.jPet.pojo.Item;
+import com.clps.jPet.pojo.Product;
+import com.clps.jPet.pojo.Profile;
 
-@Service
-public class CategoryService {
+public interface CategoryService {
 
-	@Autowired
-	private CategoryDao categoryDao;
+    List<Product> query(Category category, int begin, int end);
 
-	public List<Product> query(Category category, int begin, int end) {
+    List<Item> queryItem(String productid);
 
-		return categoryDao.query(category, begin, end);
-	}
+    Profile queryProfile(String username);
 
-	public List<Item> queryItem(String productid) {
-		// TODO Auto-generated method stub
-		return categoryDao.queryItem(productid);
-	}
+    long queryInventory(String itemid);
 
-	public Profile queryProfile(String username) {
-		// TODO Auto-generated method stub
-		return categoryDao.queryProfile(username);
-	}
+    Item queryItemTwo(String itemid);
 
-	public long queryInventory(String itemid) {
+    List<Product> queryLike(String value, int begin, int end);
 
-		return categoryDao.queryInventory(itemid);
-	}
+    CategoryDao getCategoryDao();
 
-	public Item queryItemTwo(String itemid) {
-
-		return categoryDao.queryItemTwo(itemid);
-	}
-
-	public List<Product> queryLike(String value, int begin, int end) {
-
-		return categoryDao.queryLike(value, begin, end);
-	}
-
-	public CategoryDao getCategoryDao() {
-		return categoryDao;
-	}
-
-	public void setCategoryDao(CategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
+    void setCategoryDao(CategoryDao categoryDao);
 
 }

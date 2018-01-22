@@ -6,68 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clps.jPet.dao.OrderDao;
-import com.clps.jPet.domain.Account;
-import com.clps.jPet.domain.Inventory;
-import com.clps.jPet.domain.Lineitem;
-import com.clps.jPet.domain.Orders;
-import com.clps.jPet.domain.Orderstatus;
+import com.clps.jPet.pojo.Account;
+import com.clps.jPet.pojo.Inventory;
+import com.clps.jPet.pojo.Lineitem;
+import com.clps.jPet.pojo.Orders;
+import com.clps.jPet.pojo.Orderstatus;
 
-@Service
-public class OrderService {
+public interface OrderService {
 
-	@Autowired
-	private OrderDao orderDao;
+    Account queryAccount(String userid);
 
-	public Account queryAccount(String userid) {
+    void saveOrders(Orders orders);
 
-		return orderDao.queryAccount(userid);
+    void saveLineitem(Lineitem lineitem);
 
-	}
+    void saveOrderstatus(Orderstatus orderstatus);
 
-	public void saveOrders(Orders orders) {
+    List<Orders> queryOrder(String userid, int begin, int end);
 
-		orderDao.saveOrder(orders);
+    List<Inventory> queryInventory();
 
-	}
+    void updateInventory(Inventory inventory);
 
-	public void saveLineitem(Lineitem lineitem) {
+    Orders queryOrdersOne(int orderid);
 
-		orderDao.saveLineitem(lineitem);
+    OrderDao getOrderDao();
 
-	}
-
-	public void saveOrderstatus(Orderstatus orderstatus) {
-
-		orderDao.saveOrderstatus(orderstatus);
-
-	}
-
-	public List<Orders> queryOrder(String userid, int begin, int end) {
-
-		return orderDao.queryOrder(userid, begin, end);
-
-	}
-
-	public List<Inventory> queryInventory() {
-
-		return orderDao.queryInventory();
-
-	}
-
-	public void updateInventory(Inventory inventory) {
-		orderDao.updateInventory(inventory);
-	}
-
-	public Orders queryOrdersOne(int orderid) {
-
-		return orderDao.queryOrdersOne(orderid);
-	}
-
-	public OrderDao getOrderDao() {
-		return orderDao;
-	}
-
-	public void setOrderDao(OrderDao orderDao) {
-		this.orderDao = orderDao;
-	}
+    void setOrderDao(OrderDao orderDao);
 }

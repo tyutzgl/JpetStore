@@ -1,104 +1,65 @@
 package com.clps.jPet.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.clps.jPet.pojo.Category;
+import com.clps.jPet.pojo.Item;
+import com.clps.jPet.pojo.Product;
+import com.clps.jPet.pojo.Profile;
 
-import com.clps.jPet.domain.Category;
-import com.clps.jPet.domain.Inventory;
-import com.clps.jPet.domain.Item;
-import com.clps.jPet.domain.Product;
-import com.clps.jPet.domain.Profile;
 
-@Repository
-public class CategoryDao {
+public interface CategoryDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+    /**
+     * Get product listings by category
+     *
+     * @param category
+     * @param begin
+     * @param end
+     * @return List<Product>
+     */
+    List<Product> query(Category category, int begin, int end);
 
-	public List<Product> query(Category category, int begin, int end) {
+    /**
+     * Get item listings by productId
+     *
+     * @param productid
+     * @return List<Item>
+     */
+    List<Item> queryItem(String productid);
 
-		Session session = sessionFactory.openSession();
+    /**
+     * Get item inventory by itemId
+     *
+     * @param itemid
+     * @return item inventory
+     */
+    long queryInventory(String itemid);
 
-		String hql = "from Product where category = ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, category);
-		query.setFirstResult(begin);
-		query.setMaxResults(end);
-		List<Product> productlist = query.list();
-		for (Product p : productlist) {
-			System.out.println(p.getName());
-		}
-		session.close();
-		return productlist;
-	}
+    /**
+     * Get item bt itemId
+     *
+     * @param itemid
+     * @return Item
+     */
+    Item queryItemTwo(String itemid);
 
-	public List<Item> queryItem(String productid) {
-		Session session = sessionFactory.openSession();
+    /**
+     * Search for products based on simple information
+     *
+     * @param value
+     * @param begin
+     * @param end
+     * @return List<Product>
+     */
+    List<Product> queryLike(String value, int begin, int end);
 
-		Product product = (Product) session.get(Product.class, productid);
-		Set<Item> set = product.getItems();
-		List<Item> itemlist = new ArrayList<Item>();
-		for (Item p : set) {
-			itemlist.add(p);
-
-		}
-		session.close();
-		return itemlist;
-	}
-
-	public long queryInventory(String itemid){
-		Session session = sessionFactory.openSession();
-		Inventory inventory = (Inventory) session.get(Inventory.class, itemid);
-		long qty = inventory.getQty();
-		
-		session.close();
-		return qty;
-	}
-
-	public Item queryItemTwo(String itemid) {
-
-		Session session = sessionFactory.openSession();
-		// Item Item = (Item) session.get(Item.class, itemid);
-		String hql = "from Item where itemid = ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, itemid);
-		List<Item> itemlist = query.list();
-
-		// session.close();
-		return itemlist.get(0);
-
-	}
-
-	public List<Product> queryLike(String value, int begin, int end) {
-		Session session = sessionFactory.openSession();
-
-		String hql = "FROM  Product WHERE name LIKE ? OR descn LIKE ?";
-		Query query = session.createQuery(hql);
-		query.setParameter(0, "%" + value + "%");
-		query.setParameter(1, "%" + value + "%");
-		query.setFirstResult(begin);
-		query.setMaxResults(end);
-		List<Product> productList = query.list();
-
-		session.close();
-		return productList;
-
-	}
-
-	public Profile queryProfile(String userid) {
-		Session session = sessionFactory.openSession();
-		
-		Profile profile = session.get(Profile.class, userid);
-		session.close();
-		return profile;
-
-	}
+    /**
+     * Get user's profile by userId
+     *
+     * @param userid
+     * @return user's Profile
+     */
+    Profile queryProfile(String userid);
 
 }

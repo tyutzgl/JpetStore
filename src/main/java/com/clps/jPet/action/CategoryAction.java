@@ -9,9 +9,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.clps.jPet.domain.Category;
-import com.clps.jPet.domain.Item;
-import com.clps.jPet.domain.Product;
+import com.clps.jPet.pojo.Category;
+import com.clps.jPet.pojo.Item;
+import com.clps.jPet.pojo.Product;
 import com.clps.jPet.service.CategoryService;
 import com.opensymphony.xwork2.ActionSupport;
 

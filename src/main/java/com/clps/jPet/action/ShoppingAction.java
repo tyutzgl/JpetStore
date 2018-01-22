@@ -10,12 +10,12 @@ import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.clps.jPet.domain.Cart;
-import com.clps.jPet.domain.Category;
-import com.clps.jPet.domain.Item;
-import com.clps.jPet.domain.Product;
-import com.clps.jPet.domain.Profile;
-import com.clps.jPet.domain.Signon;
+import com.clps.jPet.pojo.Cart;
+import com.clps.jPet.pojo.Category;
+import com.clps.jPet.pojo.Item;
+import com.clps.jPet.pojo.Product;
+import com.clps.jPet.pojo.Profile;
+import com.clps.jPet.pojo.Signon;
 import com.clps.jPet.service.CategoryService;
 import com.clps.jPet.service.ShoppingService;
 import com.opensymphony.xwork2.ActionContext;
@@ -87,8 +87,8 @@ public class ShoppingAction extends ActionSupport {
 	/**
 	 * 将商品加入购物车，如果已经存在则修改购物车
 	 * 
-	 * @input:item.itemid,signon.username
-	 * @output:listcart
+	 * @input item.itemid,signon.username
+	 * @output listcart
 	 * @return /cart/Cart.jsp
 	 */
 	@SuppressWarnings("unchecked")
@@ -156,7 +156,7 @@ public class ShoppingAction extends ActionSupport {
 
 	/**
 	 * 查询订单明细
-	 * @return /cart/Checkout.jsp上
+	 * @return /cart/Checkout.jsp
 	 */
 	@Action(value = "queryShoppingTwoAction", results = { @Result(name = "success", location = "/cart/Checkout.jsp") })
 	public String queryShoppingTwo() {

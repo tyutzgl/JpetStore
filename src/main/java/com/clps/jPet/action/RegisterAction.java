@@ -6,9 +6,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.clps.jPet.domain.Account;
-import com.clps.jPet.domain.Profile;
-import com.clps.jPet.domain.Signon;
+import com.clps.jPet.pojo.Account;
+import com.clps.jPet.pojo.Profile;
+import com.clps.jPet.pojo.Signon;
 import com.clps.jPet.service.RegisterService;
 import com.opensymphony.xwork2.ActionSupport;
 
