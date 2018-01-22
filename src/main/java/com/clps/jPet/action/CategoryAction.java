@@ -56,10 +56,6 @@ public class CategoryAction extends ActionSupport {
 	@Action(value = "queryItemAction", results = { @Result(name = "success", location = "/catalog/Product.jsp") })
 	public String queryItem() {
 		itemlist = categoryService.queryItem(product.getProductid());
-		System.out.println(itemlist);
-		for (Item i : itemlist) {
-			System.out.println(i.getAttr1());
-		}
 		return "success";
 	}
 
@@ -82,10 +78,8 @@ public class CategoryAction extends ActionSupport {
 	 */
 	@Action(value = "queryLikeAction", results = { @Result(name = "success", location = "/catalog/SearchProducts.jsp") })
 	public String queryLike() throws UnsupportedEncodingException {
-		System.out.println(value);
 		value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
 		productlist = categoryService.queryLike(value, begin * end, end);
-		System.out.println(productlist.get(0));
 		return "success";
 	}
 
