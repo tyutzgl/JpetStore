@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--<bean id="userService" class="com.clps.demo.service.Impl.UserServiceImpl" 
+		scope="prototype"/> -->
+
+	<!--<bean id="mainAction" class="com.clps.demo.action.MainAction" scope="prototype"> -->
+	<!--<property name="userService" ref="userService"/> -->
+	<!--</bean> -->
+<!-- 
+	<bean id="itemDao" class="com.clps.jPet.dao.ItemDao" scope="prototype"/>
+	<bean id="itemAction" class="com.clps.jPet.action.ItemAction"
+		scope="prototype">
+		<property name="itemDao" ref="itemDao"></property>
+	</bean>
+ -->
+</beans>
