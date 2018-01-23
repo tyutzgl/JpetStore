@@ -1,5 +1,7 @@
 package com.clps.jPet.action;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -27,6 +29,7 @@ public class LoginAction extends ActionSupport {
     private LoginService loginService;
 
     private static final long serialVersionUID = 1L;
+    private static Log log = LogFactory.getLog(LoginAction.class);
 
     private Signon signon;
     private Integer result;
@@ -41,10 +44,11 @@ public class LoginAction extends ActionSupport {
     @Action(value = "loginAction", results = @Result(name = "success", type = "json"))
     public String login() {
         result = loginService.userLogin(signon.getUsername(), signon.getPassword());
-        // System.out.println(result);
-        // result = 1 表示登录成功;
         if (result == 1) {
+            log.info("登录成功");
             ActionContext.getContext().getSession().put("userid", signon.getUsername());
+        } else {
+            log.info("用户名或密码错误");
         }
         return SUCCESS;
     }

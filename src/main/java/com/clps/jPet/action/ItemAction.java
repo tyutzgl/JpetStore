@@ -3,6 +3,8 @@ package com.clps.jPet.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -21,6 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ItemAction extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
+    private static Log log = LogFactory.getLog(ItemAction.class);
 
     @Autowired
     private ItemDao itemDao;

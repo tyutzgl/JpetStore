@@ -1,5 +1,7 @@
 package com.clps.jPet.action;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -22,6 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class RegisterAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
+	private static Log log = LogFactory.getLog(RegisterAction.class);
 
 	@Autowired
 	private RegisterService registerService;

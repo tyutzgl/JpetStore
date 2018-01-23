@@ -88,4 +88,15 @@ public class Profile implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Profile{" +
+				"userid='" + userid + '\'' +
+				", langpref='" + langpref + '\'' +
+				", favcategory='" + favcategory + '\'' +
+				", mylistopt=" + mylistopt +
+				", banneropt=" + banneropt +
+				", id=" + id +
+				'}';
+	}
 }

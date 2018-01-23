@@ -45,12 +45,4 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     }
 
-    public ShoppingDao getShoppingDao() {
-        return shoppingDao;
-    }
-
-    public void setShoppingDao(ShoppingDao shoppingDao) {
-        this.shoppingDao = shoppingDao;
-    }
-
 }
